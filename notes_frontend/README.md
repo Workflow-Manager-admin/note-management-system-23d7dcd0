@@ -34,7 +34,14 @@ For local development, the default is:
 ```
 REACT_APP_API_URL=http://localhost:8000
 ```
-Adjust this if your backend is running elsewhere (i.e., deployed, port mapped, etc). Create a `.env` file with this variable for correct API routing.
+If running on another port or at a different domain/host, update the `.env` file to match your backend.
+
+### Common integration issues
+- If you see network errors or 401 on login/signup/from frontend, first confirm:
+  - `.env` (and `.env.example`) have the correct REACT_APP_API_URL for your FastAPI backend.
+  - The backend allows CORS from the frontend domain/port (e.g., `http://localhost:3000`).
+  - The backend is running and reachable at the URL above.
+- If you deploy the backend, update both `.env` and backend CORS whitelist accordingly.
 
 ### CORS
 
