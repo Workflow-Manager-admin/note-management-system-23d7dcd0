@@ -27,26 +27,30 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Backend URL and CORS configuration
+## Backend URL, Environment, and CORS configuration
 
 This app expects your FastAPI backend API to run at the URL specified in the `.env` file (see `.env.example`).  
 For local development, the default is:  
 ```
 REACT_APP_API_URL=http://localhost:8000
 ```
-If running on another port or at a different domain/host, update the `.env` file to match your backend.
+If your backend runs on a different port/domain, update the `.env` accordingly, then **restart the frontend (`npm start`) for new env vars to take effect**.
 
-### Common integration issues
-- If you see network errors or 401 on login/signup/from frontend, first confirm:
-  - `.env` (and `.env.example`) have the correct REACT_APP_API_URL for your FastAPI backend.
-  - The backend allows CORS from the frontend domain/port (e.g., `http://localhost:3000`).
-  - The backend is running and reachable at the URL above.
-- If you deploy the backend, update both `.env` and backend CORS whitelist accordingly.
+### Integration troubleshooting checklist
+
+- If you see network errors, 401s, or other issues:
+  - `.env` (and optionally `.env.example`) must have the correct REACT_APP_API_URL for your backend (`http://localhost:8000`, etc).
+  - Confirm backend [CORS](https://fastapi.tiangolo.com/tutorial/cors/) allows requests from `http://localhost:3000`.
+    - FastAPI's allowed origins list must include the frontend's origin exactly (including port).
+  - Make sure backend is running and accessible at the URL in `.env`.
+  - If the backend URL or port changes, restart the frontend dev server.
+  - Check browser dev console "Network" tab for failing API calls and error details.
 
 ### CORS
 
 **The FastAPI backend must allow CORS requests from this frontend's domain.**  
-For local dev: allow `http://localhost:3000` in FastAPI's CORS settings.
+If you run the backend at `http://localhost:8000`, FastAPI must allow origin `http://localhost:3000`.  
+See FastAPI docs for [CORS setup](https://fastapi.tiangolo.com/tutorial/cors/).
 
 ## Customization
 

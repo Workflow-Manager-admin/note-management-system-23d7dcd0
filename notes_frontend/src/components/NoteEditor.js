@@ -37,8 +37,8 @@ export default function NoteEditor({ noteId, onDoneEdit }) {
         setStatus("Created.");
       }
       onDoneEdit && onDoneEdit();
-    } catch {
-      setStatus("Failed to save note.");
+    } catch (err) {
+      setStatus(err.message || "Failed to save note.");
     }
   }
 

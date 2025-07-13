@@ -50,8 +50,14 @@ export function NotesProvider({ children }) {
       const n = await res.json();
       setNotes((ns) => [n, ...ns]);
       return n;
+    } else {
+      let message = "Note creation failed";
+      try {
+        const error = await res.json();
+        if (error.detail) message = error.detail;
+      } catch {}
+      throw new Error(message);
     }
-    throw new Error("Note creation failed");
   }, [token, API_URL]);
 
   // PUBLIC_INTERFACE
@@ -71,7 +77,14 @@ export function NotesProvider({ children }) {
       );
       return updated;
     }
-    throw new Error("Could not update note");
+    else {
+      let message = "Could not update note";
+      try {
+        const error = await res.json();
+        if (error.detail) message = error.detail;
+      } catch {}
+      throw new Error(message);
+    }
   }, [token, API_URL]);
 
   // PUBLIC_INTERFACE
@@ -84,7 +97,14 @@ export function NotesProvider({ children }) {
       setNotes((prev) => prev.filter((n) => n.id !== id));
       return true;
     }
-    throw new Error("Delete failed");
+    else {
+      let message = "Delete failed";
+      try {
+        const error = await res.json();
+        if (error.detail) message = error.detail;
+      } catch {}
+      throw new Error(message);
+    }
   }, [token, API_URL]);
 
   // Initial notes load (on login)

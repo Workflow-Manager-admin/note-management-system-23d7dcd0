@@ -10,8 +10,8 @@ export default function NoteActions({ noteId, onEdit, onDelete }) {
       try {
         await deleteNote(noteId);
         if (onDelete) onDelete();
-      } catch {
-        alert("Could not delete note.");
+      } catch (err) {
+        alert(err.message || "Could not delete note.");
       }
     }
   }
