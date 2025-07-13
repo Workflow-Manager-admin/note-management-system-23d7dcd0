@@ -27,6 +27,20 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Backend URL and CORS configuration
+
+This app expects your FastAPI backend API to run at the URL specified in the `.env` file (see `.env.example`).  
+For local development, the default is:  
+```
+REACT_APP_API_URL=http://localhost:8000
+```
+Adjust this if your backend is running elsewhere (i.e., deployed, port mapped, etc). Create a `.env` file with this variable for correct API routing.
+
+### CORS
+
+**The FastAPI backend must allow CORS requests from this frontend's domain.**  
+For local dev: allow `http://localhost:3000` in FastAPI's CORS settings.
+
 ## Customization
 
 ### Colors
